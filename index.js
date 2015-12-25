@@ -6940,13 +6940,13 @@ function toArray(list, index) {
 });
 
 // mainPart
-// create by byr-gdp at 2015-12-25
+// created by byr-gdp at 2015-12-25
 
 // container
 var wrapper       = document.createElement('div');
 wrapper.id        = 'my-player';
 wrapper.className = 'abp';
-wrapper.setAttribute('style', 'width:100%; height: 600px; background: transparent;');
+wrapper.setAttribute('style', 'width:100%; height: 600px; background: transparent; position: fixed; top: 60px; left: 0;');
 var container       = document.createElement('div');
 container.id        = 'my-comment-stage';
 container.className = 'container';
@@ -6955,7 +6955,7 @@ document.getElementsByTagName("body")[0].appendChild(wrapper);
 
 // insert style
 var style = document.createElement('style');
-style.appendChild(document.createTextNode(".abp{position:relative;}.abp .container{-webkit-transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);position: absolute;display: block;overflow: hidden;margin: 0;border: 0;top: 0;left: 0;bottom: 0;right: 0;z-index: 9999;touch-callout: none;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}.abp .container .cmt{-webkit-transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);-webkit-transform-origin: 0% 0%;-ms-transform-origin: 0% 0%;transform-origin: 0% 0%;position: absolute;padding: 3px 0 0 0;margin: 0;color: #fff;font-family: SimHei, SimSun, Heiti, 'MS Mincho', 'Meiryo', 'Microsoft YaHei', monospace;font-size: 25px;text-decoration: none;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;text-size-adjust: none;    line-height: 100%;    letter-spacing: 0;    word-break: keep-all;    white-space: pre;  }  .abp .container .cmt.noshadow{    text-shadow: none;  }  .abp .container .cmt.rshadow{    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;  }    @font-face{    font-family: '\9ED1\4F53';    src:local('SimHei');  }  @font-face{    font-family: '\5B8B\4F53';    src:local('SimSun');  }  @font-face{    font-family: '\534E\6587\6977\4F53';    src:local('SimKai');  }  @font-face{    font-family: '\5E7C\5706';    src:local('YouYuan');  }  @font-face{    font-family: '\5FAE\8F6F\96C5\9ED1';    src:local('Microsoft YaHei');  }"));
+style.appendChild(document.createTextNode(".new-post {position: absolute; top: 0; left: 0; z-index: 1000;}.abp{position:relative;}.abp .container{-webkit-transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);position: absolute;display: block;overflow: hidden;margin: 0;border: 0;top: 0;left: 0;bottom: 0;right: 0;z-index: 9999;touch-callout: none;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}.abp .container .cmt{-webkit-transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);-webkit-transform-origin: 0% 0%;-ms-transform-origin: 0% 0%;transform-origin: 0% 0%;position: absolute;padding: 3px 0 0 0;margin: 0;color: #fff;font-family: SimHei, SimSun, Heiti, 'MS Mincho', 'Meiryo', 'Microsoft YaHei', monospace;font-size: 25px;text-decoration: none;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;text-size-adjust: none;    line-height: 100%;    letter-spacing: 0;    word-break: keep-all;    white-space: pre;  }  .abp .container .cmt.noshadow{    text-shadow: none;  }  .abp .container .cmt.rshadow{    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;  }    @font-face{    font-family: '\9ED1\4F53';    src:local('SimHei');  }  @font-face{    font-family: '\5B8B\4F53';    src:local('SimSun');  }  @font-face{    font-family: '\534E\6587\6977\4F53';    src:local('SimKai');  }  @font-face{    font-family: '\5E7C\5706';    src:local('YouYuan');  }  @font-face{    font-family: '\5FAE\8F6F\96C5\9ED1';    src:local('Microsoft YaHei');  }"));
 
 document.getElementsByTagName('head')[0].appendChild(style);
 
@@ -6964,7 +6964,7 @@ var newOne      = document.createElement('div');
 var input       = document.createElement('input');
 input.type      = 'text';
 input.id        = 'new';
-input.className = 'new-post';
+newOne.className = 'new-post';
 
 newOne.appendChild(input);
 
@@ -6974,32 +6974,40 @@ newOne.appendChild(btn);
 document.getElementsByTagName('body')[0].insertBefore(newOne, wrapper);
 
 btn.onclick = function() {
-  var url = "http://127.0.0.1:2333/post";
+  // var url = "http://127.0.0.1:2333/post";
+  var url = "http://10.205.13.69:2333/post";
   var msg = input.value;
+
   var xhr = createCORSRequest('POST', url);
   if (!xhr) {
     alert('CORS not supported');
     return;
   }
-
+  // CM.send({
+  //   "mode": 1,
+  //   "text": msg,
+  //   "stime": 0,
+  //   "size": 25,
+  //   "color": 0xffffff 
+  // })
   // Response handlers.
   xhr.onload = function() {
     var text   = xhr.responseText;
     var result = JSON.parse(text);
-    var max    = 0;
 
-    for(var i = 0; i < danmakuList.length; i ++) {
-      danmakuList[i].text = result[i].msg;
-      // CM.send(danmakuList[i]);
-      max = result[i].timestamp > max ? result[i].timestamp : max;
-      if(result[i].timestamp > latestTimestamp)
-      (function(j){
-        setTimeout(function() {
-          CM.send(danmakuList[j]);
-        }, Date.now() - result[j].timestamp);
-      })(i);
-    }
-    latestTimestamp = max;
+    // 不处理 responseText，交由 setInterval
+
+    // for(var i = 0; i < danmakuList.length; i ++) {
+    //   danmakuList[i].text = result[i].msg;
+    //   max = result[i].timestamp > max ? result[i].timestamp : max;
+    //   if(result[i].timestamp > latestTimestamp)
+    //   (function(j){
+    //     setTimeout(function() {
+    //       CM.send(danmakuList[j]);
+    //     }, Date.now() - result[j].timestamp);
+    //   })(i);
+    // }
+    // latestTimestamp = max;
   };
 
   xhr.onerror = function() {
@@ -7040,14 +7048,14 @@ var danmakuList = [
     },
     {
         "mode":1,
-        "text":"其中就有跨域...",
+        "text":"跨域...",
         "stime":0,
         "size":25,
         "color":0xffffff
     },
     {
         "mode":1,
-        "text":"多多包含",
+        "text":"时延...",
         "stime":0,
         "size":25,
         "color":0xffffff
@@ -7055,17 +7063,20 @@ var danmakuList = [
 ];
 
 // 载入弹幕没用，目前是 one by one send...
-CM.load(danmakuList);
+// CM.load(danmakuList);
 
 // 先启用弹幕播放（之后可以停止）, 通过 CM.stop()
 CM.start();
 
 // 发送弹幕数组也没用...
-CM.send(danmakuList);
+// CM.send(danmakuList);
 
 // send one by one
 for(var i = 0; i < danmakuList.length; i++) {
-  CM.send(danmakuList[i]);
+  // CM.send(danmakuList[i]);
+  (function(j) {setTimeout(function() {
+    CM.send(danmakuList[j])
+  }, j*100);})(i)
   // 闭包无效，尚未弄清楚 stime 意义及使用
   // (function(j) {
   //   CM.send(danmakuList[j]);
@@ -7091,7 +7102,8 @@ function createCORSRequest(method, url) {
 
 // fetch latest danmu
 var s = setInterval(function() {
-  var url = "http://127.0.0.1:2333/get";
+  // var url = "http://127.0.0.1:2333/get";
+  var url = "http://10.205.13.69:2333/get";
   var xhr = createCORSRequest('GET', url);
 
   if (!xhr) {
@@ -7123,5 +7135,5 @@ var s = setInterval(function() {
   };
   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
   xhr.send();
-}, 1000)
+}, 500)
 
