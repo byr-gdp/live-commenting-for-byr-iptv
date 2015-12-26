@@ -6946,10 +6946,12 @@ function toArray(list, index) {
 var wrapper       = document.createElement('div');
 wrapper.id        = 'my-player';
 wrapper.className = 'abp';
-wrapper.setAttribute('style', 'width:100%; height: 600px; background: transparent; position: fixed; top: 60px; left: 0;');
+wrapper.setAttribute('style', 'width:100%; height: 480px; background: transparent; position: fixed; top: 60px; left: 0;');
+
 var container       = document.createElement('div');
 container.id        = 'my-comment-stage';
 container.className = 'container';
+
 wrapper.appendChild(container);
 document.getElementsByTagName("body")[0].appendChild(wrapper);
 
@@ -6960,13 +6962,44 @@ style.appendChild(document.createTextNode(".new-post {position: absolute; top: 0
 document.getElementsByTagName('head')[0].appendChild(style);
 
 // post new one
-var newOne      = document.createElement('div');
-var input       = document.createElement('input');
-input.type      = 'text';
-input.id        = 'new';
+var newOne       = document.createElement('div');
+var input        = document.createElement('input');
+var select       = document.createElement('select');
+var option1 = document.createElement('option');
+var option2 = document.createElement('option');
+var option3 = document.createElement('option');
+var option4 = document.createElement('option');
+var option5 = document.createElement('option');
+var option6 = document.createElement('option');
+
+option1.value = 1;
+option2.value = 2;
+option3.value = 3;
+option4.value = 4;
+option5.value = 5;
+option6.value = 6;
+
+option1.appendChild(document.createTextNode('模式1'));
+option2.appendChild(document.createTextNode('模式2'));
+option3.appendChild(document.createTextNode('模式3'));
+option4.appendChild(document.createTextNode('模式4'));
+option5.appendChild(document.createTextNode('模式5'));
+option6.appendChild(document.createTextNode('模式6'));
+
+select.appendChild(option1);
+select.appendChild(option2);
+select.appendChild(option3);
+select.appendChild(option4);
+select.appendChild(option5);
+select.appendChild(option6);
+
+
+input.type       = 'text';
+input.id         = 'new';
 newOne.className = 'new-post';
 
 newOne.appendChild(input);
+newOne.appendChild(select);
 
 var btn = document.createElement('button');
 btn.appendChild(document.createTextNode("发射一波"));
@@ -7048,14 +7081,14 @@ var danmakuList = [
     },
     {
         "mode":1,
-        "text":"跨域...",
+        "text":"没有分channel",
         "stime":0,
         "size":25,
         "color":0xffffff
     },
     {
         "mode":1,
-        "text":"时延...",
+        "text":"用的本地服务器...",
         "stime":0,
         "size":25,
         "color":0xffffff
@@ -7118,6 +7151,7 @@ var s = setInterval(function() {
 
     for(var i = 0; i < danmakuList.length; i++) {
       danmakuList[i].text = result[i].msg;
+      danmakuList[i].mode = result[i].mode;
       max = result[i].timestamp > max ? result[i].timestamp : max;
       if(result[i].timestamp > latestTimestamp) {
         (function(j){
