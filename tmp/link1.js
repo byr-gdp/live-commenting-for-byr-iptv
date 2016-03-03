@@ -1,2 +1,0 @@
-javascript:(function(){
-  var link=document.createElement('link');link.type='text/css';link.rel='stylesheet';link.href='127.0.0.1:3000/stylesheets/style.css';document.getElementsByTagName('head')[0].appendChild(link);})();
